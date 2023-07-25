@@ -23,16 +23,14 @@ class MIGHGame: ApplicationAdapter() {
 
     override fun create() {
         walkSheet = Texture(Gdx.files.internal("M/M_walk.png"))
-        val tmp: Array<Array<TextureRegion>> = TextureRegion.split(
+        val tmp = TextureRegion.split(
             walkSheet,
             walkSheet.width / FRAME_COLS,
             walkSheet.height / FRAME_ROWS
         )
-        val walkFrames: Array<TextureRegion> = arrayOf(TextureRegion(), TextureRegion(), TextureRegion())
+        val walkFrames = Array(FRAME_ROWS) { TextureRegion() }
 
-        for (num in 0 until FRAME_ROWS) {
-            walkFrames[num] = tmp[num][0]
-        }
+        walkFrames.forEachIndexed { index, _ -> walkFrames[index] = tmp[index][0] }
 
         walkAnimation = Animation(0.1f, *walkFrames)
         spriteBatch = SpriteBatch()
@@ -56,6 +54,4 @@ class MIGHGame: ApplicationAdapter() {
         spriteBatch.dispose()
         walkSheet.dispose()
     }
-
-
 }

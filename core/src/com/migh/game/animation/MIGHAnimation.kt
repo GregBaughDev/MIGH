@@ -37,12 +37,12 @@ abstract class MIGHAnimation(
         spriteBatch = SpriteBatch()
     }
 
-    fun render() {
+    fun render(keycode: Int) {
         stateTime += Gdx.graphics.deltaTime
 
         spriteBatch.begin()
 
-        handleInput()
+        handleInput(keycode)
 
         val currentFrame = animation.getKeyFrame(stateTime, isAnimated)
         spriteBatch.draw(currentFrame, x, y, 150f, 150f)
@@ -54,13 +54,23 @@ abstract class MIGHAnimation(
         spriteSheet.dispose()
     }
 
-    private fun handleInput() {
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            isAnimated = true
-            x += speed
-        } else if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            isAnimated = true
-            x -= speed
+    // TO DO -> Move the below to a method that calls the appropriate method when all the sprites are done
+    private fun handleInput(keycode: Int) {
+        if (Gdx.input.isKeyPressed(keycode)) {
+            when (keycode) {
+                22 -> {
+                    if (x < Gdx.graphics.width) {
+                        isAnimated = true
+                        x += speed
+                    }
+                }
+                21 -> {
+                    if (x > 0) {
+                        isAnimated = true
+                        x -= speed
+                    }
+                }
+            }
         } else {
             isAnimated = false
         }

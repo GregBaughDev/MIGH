@@ -5,23 +5,15 @@ enum class MActions {
 }
 
 class Michael {
-    val walk: MichaelWalk = MichaelWalk(1, 3, 50f, 50f, "M/M_walk.png")
-//    val jump: MichaelMovement = MichaelMovement(1, 3, 50f, 50f, "M/M_jump.png")
+    private val walk = MichaelWalk(1, 3, 50f, 50f, "M/M_walk.png")
+    private val jump = MichaelJump(1, 3, 50f, 50f, "M/M_jump.png")
     var currentAction: MActions = MActions.WALK
 
     fun render(keycode: Int) {
         when (currentAction) {
-            MActions.WALK -> walk(keycode)
-            MActions.JUMP -> println("Jumping")
+            MActions.WALK -> walk.render(keycode)
+            MActions.JUMP -> jump.render(keycode)
         }
-    }
-
-    private fun walk(keycode: Int) {
-        walk.render(keycode)
-    }
-
-    private fun jump(keycode: Int) {
-//        jump.render(keycode)
     }
 
     fun dispose() {

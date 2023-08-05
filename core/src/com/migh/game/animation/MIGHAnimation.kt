@@ -9,15 +9,16 @@ import com.badlogic.gdx.graphics.g2d.Animation
 interface MIGHAnimation {
     val frameCols: Int
     val frameRows: Int
-    var x: Float
-    var y: Float
+    var x: Int
+    var y: Int
     val path: String
     var animation: Animation<TextureRegion>
     var spriteSheet: Texture
     var spriteBatch: SpriteBatch
     var stateTime: Float
     var isAnimated: Boolean
-    val speed: Int
+    val speedY: Int
+    val speedX: Int
 
     fun handleInput(keycode: Int)
 
@@ -29,7 +30,7 @@ interface MIGHAnimation {
         handleInput(keycode)
 
         val currentFrame = animation.getKeyFrame(stateTime, isAnimated)
-        spriteBatch.draw(currentFrame, x, y, 150f, 150f)
+        spriteBatch.draw(currentFrame, x.toFloat(), y.toFloat(), 150f, 150f)
         spriteBatch.end()
     }
 
